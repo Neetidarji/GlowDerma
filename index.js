@@ -3,13 +3,7 @@ import express from "express";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-let products = [
-  {id: 1,name: "Hydrating Serum",price: "$25",description: "A lightweight serum that deeply hydrates and plumps the skin."},
-  {id: 1,name: "Vitamin C Cream",price: "$30",description: "Brightens skin tone and reduces the appearance of dark spots."},
-  { id: 3, name: "Toner", price: "$15", description: "Balances skin pH and tightens pores." },
-  { id: 4, name: "Face Masks", price: "$30", description: "Detoxifies and refreshes the skin." },
-  { id: 5, name: "Cleanser", price: "$18", description: "Gently cleanses and removes impurities." }
-];
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Welcome to GlowDerma - Your Skincare Journey Begins Here.");
@@ -27,25 +21,74 @@ app.get("/Contact", (req, res) => {
   })
 })
 
-app.get("/products", (req, res) => {
-  res.json(products);
-})
+let orders = [
+  { id: 1, product: 'Anti-Aging Serum', quantity: 2 },
+  { id: 2, product: 'Vitamin C Moisturizer', quantity: 1 },
+  { id: 3, product: 'Hyaluronic Acid', quantity: 3 }
+];
 
-app.get("/products/:pid", (req, res) => {
-  let pid = parseInt(req.params.pid);
-  let product = products.find(x => x.id === pid);
+app.get("/orders/:orderID", (req, res) => {
+  const orderID = parseInt(req.params.orderID);
+  const order = orders.find(o => o.id === orderID);
 
-  if (product) {
-    res.status(200).json(product);
+  if (order) {
+    return res.status(200).json(order);
   } else {
-    res.status(404).send("Product not found.");
+    return res.status(404).send("Order Not Found");
   }
-})
+});
+
+let products = [
+  { id: 11, name: "Retinol Serum", price: 1200, availableQty: 50 },
+  { id: 12, name: "Niacinamide Solution", price: 800, availableQty: 30 },
+  { id: 14, name: "Peptide Moisturizer", price: 1500, availableQty: 100 },
+  { id: 15, name: "Glycolic Acid Toner", price: 900, availableQty: 20 }
+];
+
+app.get("/products", (req, res) => {
+  const { name, maxPrice } = req.query;
+
+  let filteredProducts = products;
+
+  if (name) {
+    filteredProducts = filteredProducts.filter(product => 
+      product.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  if (maxPrice) {
+    filteredProducts = filteredProducts.filter(product => 
+      product.price <= parseInt(maxPrice)
+    );
+  }
+
+  return res.json(filteredProducts);
+});
+
+let shoppingCart = [];
+
+app.get("/cart", (req, res) => {
+  res.json(shoppingCart);
+});
+
+app.post("/cart", (req, res) => {
+  const { id, name, price, qty } = req.body;
+
+  if (!id || !name || !price || !qty) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  let d = { id, name, price, qty }
+
+  shoppingCart.push(d);
+  
+  res.status(201).json({"message":"Successfully added to cart", "data":d});
+});
 
 app.use((req, res) => {
     res.status(404).json({ error: "Route not found" });
-  });
+});
 
 app.listen(PORT, () => {
-  console.log(`Server is Running on http://localhost:${PORT}`);
-})
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
