@@ -14,24 +14,19 @@ const limiter = rateLimit({
   message : "You have exceeded the 5 requests!"});
 
 app.use(limiter);
-
 app.use(express.json());
-
 app.use((req, res, next) => {
     const currentDateTime = new Date().toISOString();
     console.log(`${currentDateTime} | ${req.method} | ${req.path}`);
     next();
 });
 app.use('/assets', express.static(path.join(__dirname, 'public')));
-
 app.get("/", (req, res) => {
     res.send("Welcome to GlowDerma - Your Skincare Journey Begins Here");
 });
-
 app.get("/about", (req, res) => {
     res.send("<h3>We are a premium skincare brand committed to bringing you dermatologist-approved, clean beauty products</h3>");
 });
-
 app.get("/contact", (req, res) => {
     res.send({
         "email": "care@glowderma.com",
@@ -121,7 +116,7 @@ app.get("/policy", (req, res) => {
     res.send("Policy Information");
 });
 app.get("/image", (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'demo.png')); // Use forward slashes for paths.
+    res.sendFile(path.join(__dirname, 'public1', 'demo.png')); // Use forward slashes for paths.
 });
 app.use((req, res, next) => {
     res.status(404).send("We don't have this page yet!");

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Our Offerings</h1>
+
+  {{#each offerings}}
+    <p class="offering">
+      <strong>{{name}}</strong><br>
+      <span class="description">{{description}}</span><br>
+      <span class="price">Price: ${{price}}</span><br>
+      <span class="duration">Duration: {{duration}}</span><br>
+      <span class="{{#if available}}available{{else}}unavailable{{/if}}">
+        {{#if available}}Available{{else}}Currently Unavailable{{/if}}
+      </span>
+    </p>
+  {{/each}}
+</body>
+</html>

@@ -1,0 +1,125 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+  }
+ 
+  h1 {
+    font-size: 2em;
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .offering {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .offering .description {
+    color: #777;
+    font-style: italic;
+  }
+  
+  .offering .price {
+    color: #4CAF50;
+    font-weight: bold;
+  }
+  
+  .offering .duration {
+    color: #333;
+  }
+  
+  .offering .available {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .offering .unavailable {
+    color: red;
+    font-weight: bold;
+  }
+
+  .testimonial {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .testimonial .rating {
+    font-size: 1.1em;
+    color: gold;
+  }
+  
+  .testimonial .comment {
+    font-size: 1em;
+    color: #555;
+  }
+  
+  .testimonial .date {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 10px;
+  }
+ 
+  .appointment-details {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .appointment-details p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+  
+  .appointment-details strong {
+    color: #333;
+  }
+
+  .services-heading {
+    font-size: 1.8em;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+  
+    h1 {
+      font-size: 1.6em;
+    }
+  
+    .offering,
+    .testimonial,
+    .appointment-details {
+      padding: 10px;
+    }
+  }
+  
